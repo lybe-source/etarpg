@@ -1,0 +1,23 @@
+<nav>
+    <ul class="menu">
+        <li><a href="#">Boutique</a></li>
+        <li><a href="#">Leaderboard</a></li>
+
+        {% if app.user %}
+            
+            <li class="dorpdown last-item">
+                <a href="#" class="dropdown-toggle">{{ app.user.username }}</a>
+                <ul class="dopdown-menu">
+                    <li><a href="{{ path('perso_index') }}">Mon perso</a></li>
+                    <li><a href="{{ path('logout') }}">Déconnexion</a></li>
+                </ul>
+            </li>
+
+        {% else %}
+
+            {# le path devra être celui pour se connecter avec discord #}
+            <li class="last-item"><a href="{{ path('perso_index') }}">Connexion</a></li>
+
+        {% endif %}
+    </ul>
+</nav>
