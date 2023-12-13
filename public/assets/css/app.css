@@ -53,26 +53,44 @@ nav {
     position: fixed;
     top: 0;
     left: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     width: 100%;
     height: 80px;
-    background-color: #f2f2f2;
+    background-color: var(--text-color);
     z-index: 999;
 }
 
 nav .menu {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     list-style: none;
 }
 
 nav .menu li {
+    width: 100px;
+    height: 80px;
     margin-right: 15px;
 }
 
+nav .menu li a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px;
+    width: 100%;
+    height: 80%;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--background-color);
+}
+
+nav .menu li a:hover {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
 nav .menu .last-item {
-    margin-right: 0;
     margin-left: auto;
 }
 

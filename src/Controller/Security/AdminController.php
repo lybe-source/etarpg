@@ -1,24 +1,21 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Security;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/', name: 'perso_')]
-class PersoController extends AbstractController
+#[Route('/admin', name: 'admin_')]
+class AdminController extends AbstractController
 {
-
-    private $cssClass = "perso";
+    private $cssClass = "admin";
 
     #[Route('/', name: 'index')]
     public function index (): Response
     {
-        $perso = "Perso";
 
-        return $this->render('perso/index.html.twig', [
-            'perso' => $perso,
+        return $this->render('admin/index.html.twig', [
             'cssClass' => $this->cssClass,
         ]);
     }
