@@ -4,21 +4,29 @@
         <li><a href="{{ path('boutique_index') }}">Boutique</a></li>
         <li><a href="{{ path('classement_index') }}">Leaderboard</a></li>
 
-        {% if app.user %}
+        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
             
-            <li class="dropdown last-item">
-                <a href="#" class="dropdown-toggle">{{ app.user.username }}</a>
-                <ul class="dropdown-menu">
-                    <li><a href="{{ path('perso_index') }}">Mon perso</a></li>
-                    <li><a href="{{ path('logout') }}">Déconnexion</a></li>
-                </ul>
+            <li class="last-item">
+                <form action="{{ path('oauth_discord_connect') }}" method="post">
+                    <input type="hidden" name="token" value="{{ csrf_token('discord-auth') }}">
+                    <button type="submit">Connexion</button>
+                </form>
             </li>
 
         {% else %}
-
-            {# le path devra être celui pour se connecter avec discord #}
-            <li class="last-item"><a href="{{ path('perso_index') }}">Connexion</a></li>
+            
+            <li class="dropdown last-item">
+                <a href="#" class="dropdown-toggle">
+                    <img src="{{ app.user.avatar }}" alt="Avatar of the member" />
+                    {{ app.user.username }}
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path('perso_index') }}">Mon perso</a></li>
+                    <li><a href="{{ path('accueil_logout') }}">Déconnexion</a></li>
+                </ul>
+            </li>
 
         {% endif %}
+
     </ul>
 </nav>

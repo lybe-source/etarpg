@@ -4,26 +4,34 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Serializable;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User implements UserInterface, PasswordAuthenticatedUserInterface, Serializable
+#[ORM\Table(name: '`user`', options: ["collate" => "utf8mb4_general_ci"])]
+class User implements UserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private ?int $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $username = null;
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
+    private ?string $username;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
+    private ?string $email;
+
+    #[ORM\Column(type: 'json')]
     private array $roles = [];
 
+    #[ORM\Column(type: 'string', length: 32)]
+    private ?string $discordId;
+
+    #[ORM\Column(type: 'string', length: 32)]
+    private ?string $avatar;
+
     #[ORM\Column(length: 255)]
-    private ?string $password = null;
+    private ?string $accessToken = null;
 
     public function getId(): ?int
     {
@@ -35,41 +43,86 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         return $this->username;
     }
 
-    public function setUsername(string $username): static
+    public function setUsername(string $username): self
     {
         $this->username = $username;
 
         return $this;
     }
 
+    /**
+     * A visual identifier that represents this user.
+     * 
+     * @see UserInterface
+     */
     public function getUserIdentifier(): string
     {
-        return (string) $this->username;
+        return "{$this->email}-{$this->username}";
+    }
+    
+    public function getEmail(): ?string
+    {
+        return $this->email;
     }
 
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
     public function getRoles(): array
     {
-        return $this->roles;
+        $roles = $this->roles;
+
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
     }
 
-    public function setRoles(array $roles): static
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
         return $this;
     }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
-    public function getPassword(): ?string
+    public function getDiscordId(): ?string
     {
-        return $this->password;
+        return $this->discordId;
     }
 
-    public function setPassword(string $password): static
+    public function setDiscordId(string $discordId): self
     {
-        $this->password = $password;
+        $this->discordId = $discordId;
+
+        return $this;
+    }
+    
+    public function getAvatar(): ?string
+    {
+        return "https://cdn.discordapp.com/avatars/{$this->discordId}/{$this->avatar}.webp";
+    }
+
+    public function setAvatar(string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+    
+    public function getAccessToken(): ?string
+    {
+        return $this->accessToken;
+    }
+
+    public function setAccessToken(string $accessToken): self
+    {
+        $this->accessToken = $accessToken;
 
         return $this;
     }
@@ -80,37 +133,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     public function eraseCredentials(): void
     {
         
-    }
-
-    /**
-     * String representation of object
-     * @Link https://php.net/manual/en/serializable.serialize.php
-     * @return string the string representation of the object or null
-     * @since 5.1.0
-     */
-    public function serialize()
-    {
-        return serialize([
-            $this->id,
-            $this->username,
-            $this->password
-        ]);
-    }
-
-    /**
-     * Constructs the object
-     * @Link https://php.net/manual/en/serializable.unserialize.php
-     * @param string $data
-     * The string representation of the object.
-     * @return void
-     * @since 5.1.0
-     */
-    public function unserialize(string $data)
-    {
-        list(
-            $this->id,
-            $this->username,
-            $this->password
-        ) = unserialize($data, ['allowed_classes' => false]);
     }
 }
