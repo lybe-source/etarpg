@@ -27,8 +27,8 @@ class User implements UserInterface
     #[ORM\Column(type: 'string', length: 32)]
     private ?string $discordId;
 
-    #[ORM\Column(type: 'string', length: 32)]
-    private ?string $avatar;
+    #[ORM\Column(type: 'string', length: 32, nullable: true)]
+    private ?string $avatar = null;
 
     #[ORM\Column(length: 255)]
     private ?string $accessToken = null;
@@ -108,7 +108,7 @@ class User implements UserInterface
         return "https://cdn.discordapp.com/avatars/{$this->discordId}/{$this->avatar}.webp";
     }
 
-    public function setAvatar(string $avatar): self
+    public function setAvatar(?string $avatar): self
     {
         $this->avatar = $avatar;
 

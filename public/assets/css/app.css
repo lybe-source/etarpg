@@ -118,7 +118,7 @@ nav .menu .last-item {
     justify-content: center;
     align-items: center;
     margin-left: auto;
-    width: 150px;
+    width: 300px;
 }
 
 nav .menu .last-item img {
@@ -136,6 +136,7 @@ nav .menu .last-item .dropdown-menu {
     align-items: center;
     position: absolute;
     top: 80px;
+    right: -15px;
     width: 200px;
     list-style: none;
     background-color: var(--text-color);
