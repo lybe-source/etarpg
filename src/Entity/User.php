@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\CreatedAtTrait;
+use App\Entity\Traits\UpdatedAtTrait;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -10,6 +12,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Table(name: '`user`', options: ["collate" => "utf8mb4_general_ci"])]
 class User implements UserInterface
 {
+    use CreatedAtTrait;
+    use UpdatedAtTrait;
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -32,6 +37,12 @@ class User implements UserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $accessToken = null;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable();
+        $this->updated_at = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
