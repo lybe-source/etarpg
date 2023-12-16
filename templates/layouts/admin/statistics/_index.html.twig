@@ -16,6 +16,7 @@
             <thead>
                 <tr>
                     <th>Nom</th>
+                    <th>Stat</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -23,6 +24,7 @@
                 {% for stat in statistics %}
                     <tr>
                         <td>{{ stat.name }}</td>
+                        <td>{{ stat.amount }}</td>
                         <td>
                             <a class="btn btn-edit" href="{{ path('admin_statistics_edit', {id: stat.id}) }}" style="font-size: .9rem; text-decoration: none; padding: 8px">Éditer</a>
 

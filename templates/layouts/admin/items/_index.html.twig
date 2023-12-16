@@ -16,6 +16,7 @@
             <thead>
                 <tr>
                     <th>Nom</th>
+                    <th>Stat</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -23,6 +24,7 @@
                 {% for item in items %}
                     <tr>
                         <td>{{ item.name }}</td>
+                        <td>{{ item.stat.amount }}</td>
                         <td>
                             <a class="btn btn-edit" href="{{ path('admin_items_edit', {id: item.id}) }}" style="font-size: .9rem; text-decoration: none; padding: 8px">Éditer</a>
 
@@ -38,7 +40,7 @@
         </table>
 
         <div class="cat-new">
-            <a href="{{ path('admin_items_new') }}">Créer une nouvelle catégorie</a>
+            <a href="{{ path('admin_items_new') }}">Créer un nouvel item</a>
         </div>
         
     </div>

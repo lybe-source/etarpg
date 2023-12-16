@@ -16,6 +16,7 @@
             <thead>
                 <tr>
                     <th>Nom</th>
+                    <th>Taux de drop</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -23,6 +24,7 @@
                 {% for rarity in rarities %}
                     <tr>
                         <td>{{ rarity.name }}</td>
+                        <td>{{ rarity.drop_rate }}</td>
                         <td>
                             <a class="btn btn-edit" href="{{ path('admin_rarity_edit', {id: rarity.id}) }}" style="font-size: .9rem; text-decoration: none; padding: 8px">Éditer</a>
 
