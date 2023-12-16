@@ -1,0 +1,52 @@
+table {
+    width: 800px;
+    margin-bottom: 2rem;
+    padding: 1rem;
+}
+
+thead tr th {
+    font-size: 2rem;
+    background-color: green;
+}
+
+tbody {
+    margin-top: .8rem;
+    font-size: 1.6rem;
+}
+
+tbody tr {
+    margin-bottom: .8rem;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+    color: var(--background-color);
+}
+
+tbody tr:hover {
+    background-color: green;
+    color: var(--text-color);
+}
+
+tbody tr td {
+    padding: .2rem;
+}
+
+tbody tr td:first-child {
+    width: 70%;
+    padding-left: 20px;
+}
+
+tbody tr td:last-child {
+    display: flex;
+    justify-content: space-around;
+}
+
+tbody tr td:last-child a {
+    margin-right: 20px;
+}
+
+tbody tr td:last-child form {
+    display: flex;
+    align-items: center;
+}

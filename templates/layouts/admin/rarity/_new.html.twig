@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    
+    <div class="container">
+    
+        <h1>{{ title }}</h1>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+
+        {{ form_start(form) }}
+
+            {{ form_row(form.name) }}
+
+            {{ form_row(form.drop_rate) }}
+            {{ form_row(form.drop_rate_hidden, {'attri': {'id': 'drop_rate_hidden'}}) }}
+
+            {{ form_row(form.description) }}
+
+            <button type="submit">Enregistrer</button>
+
+        {{ form_end(form) }}
+        
+    </div>
+
+    {% block javascripts %}
+        {{ parent() }}
+        
+        <script src="{{ asset('assets/js/selectRarity.js') }}"></script>
+    {% endblock %}
+
+{% endblock %}

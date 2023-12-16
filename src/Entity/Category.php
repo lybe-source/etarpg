@@ -4,14 +4,14 @@ namespace App\Entity;
 
 use App\Entity\Traits\CreatedAtTrait;
 use App\Entity\Traits\UpdatedAtTrait;
-use App\Repository\RarityRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: RarityRepository::class)]
-#[ORM\Table(name: '`rarity`', options: ["collate" => "utf8mb4_general_ci"])]
-class Rarity
+#[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[ORM\Table(name: '`category`', options: ["collate" => "utf8mb4_general_ci"])]
+class Category
 {
     use CreatedAtTrait;
     use UpdatedAtTrait;
@@ -24,13 +24,7 @@ class Rarity
     #[ORM\Column(length: 30)]
     private ?string $name = null;
 
-    #[ORM\Column]
-    private ?int $drop_rate = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $description = null;
-
-    #[ORM\OneToMany(mappedBy: 'rarity', targetEntity: Items::class)]
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Items::class)]
     private Collection $items;
 
     public function __construct()
@@ -56,30 +50,6 @@ class Rarity
 
         return $this;
     }
-    
-    public function getDropRate(): ?int
-    {
-        return $this->drop_rate;
-    }
-
-    public function setDropRate(int $drop_rate): static
-    {
-        $this->drop_rate = $drop_rate;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): static
-    {
-        $this->description = $description;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Items>
@@ -93,7 +63,7 @@ class Rarity
     {
         if (!$this->items->contains($item)) {
             $this->items->add($item);
-            $item->setRarity($this);
+            $item->setCategory($this);
         }
 
         return $this;
@@ -103,8 +73,8 @@ class Rarity
     {
         if ($this->items->removeElement($item)) {
             // set the owning side to null (unless already changed)
-            if ($item->getRarity() === $this) {
-                $item->setRarity(null);
+            if ($item->getCategory() === $this) {
+                $item->setCategory(null);
             }
         }
 

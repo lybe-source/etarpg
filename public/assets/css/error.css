@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.container.error {
+    display: flex;
+    flex-direction: column;
+    width: 950px;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.error .code, .error .link {
+    display: block;
+    width: 100%;
+    height: 50%;
+    padding: 1rem;
+}
+
+.error .code {
+    font-size: 4rem;
+}
+
+.error .code h1 {
+    color: blue;
+}
+
+.error .link {
+    display: flex;
+    justify-content: center;
+}
+
+.error .link a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+}

@@ -38,6 +38,9 @@ class User implements UserInterface
     #[ORM\Column(length: 255)]
     private ?string $accessToken = null;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Inventory $inventory = null;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
@@ -144,5 +147,22 @@ class User implements UserInterface
     public function eraseCredentials(): void
     {
         
+    }
+
+    public function getInventory(): ?Inventory
+    {
+        return $this->inventory;
+    }
+
+    public function setInventory(Inventory $inventory): static
+    {
+        // set the owning side of the relation if necessary
+        if ($inventory->getUser() !== $this) {
+            $inventory->setUser($this);
+        }
+
+        $this->inventory = $inventory;
+
+        return $this;
     }
 }

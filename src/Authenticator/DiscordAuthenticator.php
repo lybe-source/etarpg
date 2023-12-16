@@ -22,10 +22,7 @@ class DiscordAuthenticator extends AbstractAuthenticator
     public function __construct(
         private readonly UserRepository $userRepo,
         private readonly RouterInterface $router
-    )
-    {
-        
-    }
+    ) {}
 
     public function supports(Request $request): ?bool
     {

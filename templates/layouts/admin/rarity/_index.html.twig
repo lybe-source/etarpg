@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    
+    <div class="container">
+    
+        <h1>{{ title }}</h1>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rarity in rarities %}
+                    <tr>
+                        <td>{{ rarity.name }}</td>
+                        <td>
+                            <a class="btn btn-edit" href="{{ path('admin_rarity_edit', {id: rarity.id}) }}" style="font-size: .9rem; text-decoration: none; padding: 8px">Éditer</a>
+
+                            <form method="POST" action="{{ path('admin_rarity_delete', {id: rarity.id}) }}" onsubmit="return confirm('Êtes-vous vraiment sûr de vouloir supprimer cette rareté ?')">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('admin/rarity/delete' ~ rarity.id) }}">
+                                <button class="btn btn-delete">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="cat-new">
+            <a href="{{ path('admin_rarity_new') }}">Créer une nouvelle rareté</a>
+        </div>
+        
+    </div>
+
+{% endblock %}

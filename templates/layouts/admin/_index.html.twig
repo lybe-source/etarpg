@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    
+    <div class="container">
+    
+        <h1>{{ title }}</h1>
+
+        <div class="cat">
+            <h2>Catégorie</h2>
+            <a href="{{ path('admin_category_index') }}">Voir toutes les catégories</a>
+        </div>
+
+        <div class="rarity">
+            <h2>Rareté</h2>
+            <a href="{{ path('admin_rarity_index') }}">Voir toutes les raretés</a>
+        </div>
+
+        <div class="stat">
+            <h2>Statistique</h2>
+            <a href="{{ path('admin_statistics_index') }}">Voir toutes les statistiques</a>
+        </div>
+
+        <div class="items">
+            <h2>Items</h2>
+            <a href="{{ path('admin_items_index') }}">Voir tout les items</a>
+        </div>
+        
+    </div>
+
+{% endblock %}

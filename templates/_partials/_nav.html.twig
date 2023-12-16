@@ -23,6 +23,11 @@
                 <ul class="dropdown-menu">
                     <li><a href="{{ path('perso_index') }}">Mon perso</a></li>
                     <li><a href="{{ path('accueil_logout') }}">Déconnexion</a></li>
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ path('admin_index') }}">Administration</a></li>
+                    {% endif %}
+
                 </ul>
             </li>
 

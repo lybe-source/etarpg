@@ -11,10 +11,9 @@ class AdminController extends AbstractController
 {
     private $cssClass = "admin";
 
-    #[Route('/', name: 'index')]
-    public function index (): Response
+    #[Route('/', name: 'index', methods: ['GET'])]
+    public function index(): Response
     {
-
         return $this->render('admin/index.html.twig', [
             'cssClass' => $this->cssClass,
         ]);
