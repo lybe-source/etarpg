@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ItemsRepository::class)]
+#[ORM\Table(name: '`items`', options: ["collate" => "utf8mb4_general_ci"])]
 class Items
 {
     use CreatedAtTrait;

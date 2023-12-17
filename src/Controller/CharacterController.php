@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CharacterController extends AbstractController
 {
 
-    private $cssClass = "perso";
+    private $cssClass = "character";
 
     #[Route('/', name: 'index')]
     public function index (): Response

@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminCategoryController extends AbstractController
 {
     private $cssClass = "admin";
+    private $route_index = "admin_category_index";
 
     #[Route('/', name: 'index', methods: ['GET'])]
     public function index(CategoryRepository $categoryRepo): Response
@@ -40,6 +41,7 @@ class AdminCategoryController extends AbstractController
         return $this->render('admin/category/new.html.twig',[
             'cssClass' => $this->cssClass,
             'categories' => $category,
+            'routes' => $this->route_index,
             'form' => $form->createView(),
         ]);
     }
@@ -59,6 +61,7 @@ class AdminCategoryController extends AbstractController
         return $this->render('admin/category/edit.html.twig', [
             'cssClass' => $this->cssClass,
             'categories' => $category,
+            'routes' => $this->route_index,
             'form' => $form->createView(),
         ]);
     }

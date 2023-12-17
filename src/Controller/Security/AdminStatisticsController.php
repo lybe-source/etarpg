@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminStatisticsController extends AbstractController
 {
     private $cssClass = "admin";
+    private $route_index = "admin_statistics_index";
     private $em;
 
     public function __construct(EntityManagerInterface $em)
@@ -53,6 +54,7 @@ class AdminStatisticsController extends AbstractController
         return $this->render('admin/statistics/new.html.twig',[
             'cssClass' => $this->cssClass,
             'statistics' => $statistics,
+            'routes' => $this->route_index,
             'form' => $form->createView(),
         ]);
     }
@@ -73,6 +75,7 @@ class AdminStatisticsController extends AbstractController
         return $this->render('admin/statistics/edit.html.twig', [
             'cssClass' => $this->cssClass,
             'statistics' => $statistics,
+            'routes' => $this->route_index,
             'form' => $form->createView(),
         ]);
     }

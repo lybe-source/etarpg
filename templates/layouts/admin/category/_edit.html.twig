@@ -7,6 +7,10 @@
 
         {{ include("_partials/_form.html.twig", {form: form, button: 'Éditer'}) }}
 
+        <div class="back-url">
+            <a href="{{ path('admin_category_index') }}"><ion-icon name="caret-back-circle-outline"></ion-icon><span>Retour</span></a>
+        </div>
+        
     </div>
     
 {% endblock %}

@@ -15,17 +15,17 @@
         <table>
             <thead>
                 <tr>
-                    <th>Nom</th>
-                    <th>Stat</th>
-                    <th>Actions</th>
+                    <th class="size-field-items field-name">Nom</th>
+                    <th class="field-drop">Stat</th>
+                    <th class="field-action">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for stat in statistics %}
                     <tr>
                         <td>{{ stat.name }}</td>
-                        <td>{{ stat.amount }}</td>
-                        <td>
+                        <td class="center">{{ stat.amount }}</td>
+                        <td class="actions">
                             <a class="btn btn-edit" href="{{ path('admin_statistics_edit', {id: stat.id}) }}" style="font-size: .9rem; text-decoration: none; padding: 8px">Éditer</a>
 
                             <form method="POST" action="{{ path('admin_statistics_delete', {id: stat.id}) }}" onsubmit="return confirm('Êtes-vous vraiment sûr de vouloir supprimer cette statistique ?')">
@@ -41,6 +41,10 @@
 
         <div class="cat-new">
             <a href="{{ path('admin_statistics_new') }}">Créer une nouvelle rareté</a>
+        </div>
+        
+        <div class="back-url">
+            <a href="{{ path('admin_index') }}"><ion-icon name="caret-back-circle-outline"></ion-icon><span>Retour</span></a>
         </div>
         
     </div>

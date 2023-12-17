@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminItemsController extends AbstractController
 {
     private $cssClass = "admin";
+    private $route_index = "admin_items_index";
     private $em;
 
     public function __construct(EntityManagerInterface $em)
@@ -53,6 +54,7 @@ class AdminItemsController extends AbstractController
         return $this->render('admin/items/new.html.twig',[
             'cssClass' => $this->cssClass,
             'items' => $items,
+            'routes' => $this->route_index,
             'form' => $form->createView(),
         ]);
     }
@@ -73,6 +75,7 @@ class AdminItemsController extends AbstractController
         return $this->render('admin/items/edit.html.twig', [
             'cssClass' => $this->cssClass,
             'items' => $items,
+            'routes' => $this->route_index,
             'form' => $form->createView(),
         ]);
     }

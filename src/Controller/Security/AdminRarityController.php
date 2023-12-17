@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminRarityController extends AbstractController
 {
     private $cssClass = "admin";
+    private $route_index = "admin_rarity_index";
     private $em;
 
     public function __construct(EntityManagerInterface $em)
@@ -53,6 +54,7 @@ class AdminRarityController extends AbstractController
         return $this->render('admin/rarity/new.html.twig',[
             'cssClass' => $this->cssClass,
             'rarities' => $rarity,
+            'routes' => $this->route_index,
             'form' => $form->createView(),
         ]);
     }
@@ -73,6 +75,7 @@ class AdminRarityController extends AbstractController
         return $this->render('admin/rarity/edit.html.twig', [
             'cssClass' => $this->cssClass,
             'rarities' => $rarity,
+            'routes' => $this->route_index,
             'form' => $form->createView(),
         ]);
     }

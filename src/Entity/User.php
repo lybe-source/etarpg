@@ -37,12 +37,16 @@ class User implements UserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $accessToken = null;
+    
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
+    private ?bool $is_banned = false;
 
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Inventory $inventory = null;
 
     public function __construct()
     {
+        $this->is_banned = false;
         $this->created_at = new \DateTimeImmutable();
         $this->updated_at = new \DateTimeImmutable();
     }
@@ -137,6 +141,18 @@ class User implements UserInterface
     public function setAccessToken(string $accessToken): self
     {
         $this->accessToken = $accessToken;
+
+        return $this;
+    }
+    
+    public function isIsBanned(): ?bool
+    {
+        return $this->is_banned;
+    }
+
+    public function setIsBanned(bool $is_banned): static
+    {
+        $this->is_banned = $is_banned;
 
         return $this;
     }

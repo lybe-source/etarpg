@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+    <div class="container">
+        <h1>{{ title }}</h1>
+
+        {{ include("_partials/_form.html.twig", {form: form, button: 'Éditer'}) }}
+
+        <div class="back-url">
+            <a href="{{ path('admin_items_index') }}"><ion-icon name="caret-back-circle-outline"></ion-icon><span>Retour</span></a>
+        </div>
+        
+    </div>
+    
+{% endblock %}

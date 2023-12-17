@@ -15,17 +15,25 @@
         <table>
             <thead>
                 <tr>
-                    <th>Nom</th>
-                    <th>Stat</th>
-                    <th>Actions</th>
+                    <th class="size-field-items field-name">Nom</th>
+                    <th class="field-stat">Stat</th>
+                    <th class="field-drop">Taux de drop</th>
+                    <th class="field-action">Actions</th>
+                    <th class="field-icon">Icon</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in items %}
                     <tr>
                         <td>{{ item.name }}</td>
-                        <td>{{ item.stat.amount }}</td>
-                        <td>
+                        <td class="center">
+                            {% for stat in item.stat %}
+                                {{ stat.amount }}
+                                {% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td class="center">{{ item.rarity ? item.rarity.getDropRate() ~ ' %' : 'N/A' }}</td>
+                        <td class="actions">
                             <a class="btn btn-edit" href="{{ path('admin_items_edit', {id: item.id}) }}" style="font-size: .9rem; text-decoration: none; padding: 8px">Éditer</a>
 
                             <form method="POST" action="{{ path('admin_items_delete', {id: item.id}) }}" onsubmit="return confirm('Êtes-vous vraiment sûr de vouloir supprimer cet item ?')">
@@ -34,6 +42,8 @@
                                 <button class="btn btn-delete">Supprimer</button>
                             </form>
                         </td>
+                        <td><div class="image-cell"><img src="" alt="Icon"></td>
+                        </div>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -41,6 +51,10 @@
 
         <div class="cat-new">
             <a href="{{ path('admin_items_new') }}">Créer un nouvel item</a>
+        </div>
+        
+        <div class="back-url">
+            <a href="{{ path('admin_index') }}"><ion-icon name="caret-back-circle-outline"></ion-icon><span>Retour</span></a>
         </div>
         
     </div>
