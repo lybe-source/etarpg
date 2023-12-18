@@ -37,7 +37,7 @@ class Choice {
      * Montant de statistique
      * par exemple : 10 points d'attaque ou 10 point d'armure
      */
-    public function getAmoutChoice(): array
+    public function getAmountChoice(): array
     {
         return [
             "5" => 5,

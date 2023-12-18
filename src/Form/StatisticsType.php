@@ -30,7 +30,7 @@ class StatisticsType extends AbstractType
             ])
             ->add('amount', ChoiceType::class, [
                 'label' => 'Taux de stat',
-                'choices' => $this->choice->getAmoutChoice(),
+                'choices' => $this->choice->getAmountChoice(),
                 'row_attr' => [
                     'class' => 'form-group'
                 ],
@@ -40,7 +40,7 @@ class StatisticsType extends AbstractType
             ->add('amount_hidden', ChoiceType::class, [
                 'mapped' => false,
                 'label' => false,
-                'choices' => $this->choice->getAmoutChoice(),
+                'choices' => $this->choice->getAmountChoice(),
                 'attr' => [
                     'style' => 'display:none'
                 ],
