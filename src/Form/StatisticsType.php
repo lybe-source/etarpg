@@ -6,6 +6,7 @@ use App\Entity\Statistics;
 use App\Form\_partials\Choice;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -45,7 +46,12 @@ class StatisticsType extends AbstractType
                     'style' => 'display:none'
                 ],
             ])
-            ->add('description')
+            ->add('description', TextType::class, [
+                'label' => 'Description',
+                'row_attr' => [
+                    'class' => 'form-group'
+                ],
+            ])
         ;
     }
 

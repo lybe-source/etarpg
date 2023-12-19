@@ -10,6 +10,7 @@ use App\Entity\Statistics;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,8 +27,16 @@ class ItemsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('description')
+            ->add('name', TextType::class, [
+                'row_attr' => [
+                    'class' => 'form-group'
+                ],
+            ])
+            ->add('description', TextType::class, [
+                'row_attr' => [
+                    'class' => 'form-group'
+                ],
+            ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
@@ -39,6 +48,9 @@ class ItemsType extends AbstractType
             ->add('rarity', EntityType::class, [
                 'class' => Rarity::class,
                 'choice_label' => 'name',
+                'row_attr' => [
+                    'class' => 'form-group'
+                ],
             ])
             ->add('stat', EntityType::class, [
                 'class' => Statistics::class,

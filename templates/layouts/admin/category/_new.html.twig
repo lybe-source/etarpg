@@ -12,7 +12,7 @@
             <div class="alert alert-success">{{ message }}</div>
         {% endfor %}
 
-        {{ form_start(form) }}
+        {{ form_start(form, {attr: {class: 'form-new'}}) }}
 
             {{ form_row(form.name) }}
 
