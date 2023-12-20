@@ -1,5 +1,45 @@
-.cat-new {
-    font-size: 1.5rem;
+.container.admin .cat,
+.container.admin .rarity,
+.container.admin .stat,
+.container.admin .items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 500px;
+    margin: 1rem auto;
+}
+
+.cat h2,
+.rarity h2,
+.stat h2,
+.items h2 {
+    margin-right: 1rem;
+}
+
+.admin .cat a,
+.admin .rarity a,
+.admin .stat a,
+.admin .items a,
+.admin .cat-new a,
+.admin .rarity-new a,
+.admin .stat-new a,
+.admin .items-new a {
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: var(--text-color);
+    color: var(--background-color);
+}
+
+.admin .cat a,
+.admin .rarity a,
+.admin .stat a,
+.admin .items a {
+    width: 250px;
 }
 
 .back-url {

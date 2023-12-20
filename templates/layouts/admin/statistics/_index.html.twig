@@ -4,7 +4,7 @@
 
 {% block body %}
     
-    <div class="container">
+    <div class="container admin">
     
         <h1>{{ title }}</h1>
 
@@ -12,7 +12,7 @@
             <div class="alert alert-success">{{ message }}</div>
         {% endfor %}
 
-        <table>
+        <table class="tab-stat">
             <thead>
                 <tr>
                     <th class="size-field-items field-name">Nom</th>
@@ -39,7 +39,7 @@
             </tbody>
         </table>
 
-        <div class="cat-new">
+        <div class="stat-new">
             <a href="{{ path('admin_statistics_new') }}">Créer une nouvelle rareté</a>
         </div>
         

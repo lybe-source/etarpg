@@ -16,15 +16,15 @@
     color: var(--text-color);
 }
 
-.form,
+.form-edit,
 .form-new {
     display: flex;
     flex-direction: column;
-    width: 350px;
+    width: 500px;
     margin: 1rem auto;
 }
 
-.form .form-group,
+.form-edit .form-group,
 .form-new .form-group {
     display: flex;
     justify-content: space-between;
@@ -33,14 +33,14 @@
     font-size: 1.5rem;
 }
 
-.form .form-group label,
+.form-edit .form-group label,
 .form-new .form-group label {
     padding: 8px 0;
 }
 
-.form .form-group select,
+.form-edit .form-group select,
 .form-new .form-group select,
-.form .form-group input[type="text"],
+.form-edit .form-group input[type="text"],
 .form-new .form-group input[type="text"] {
     width: 150px;
     padding: 8px;
@@ -51,7 +51,7 @@
     overflow: hidden;
 }
 
-.form .form-btn,
+.form-edit .form-btn,
 .form-new button[type="submit"] {
     padding: 10px;
     border: none;

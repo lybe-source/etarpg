@@ -26,6 +26,7 @@
 }
 
 body {
+    position: relative;
     min-height: 100vh;
     font-family: "ghost-house", sans-serif;
     font-size: 1rem;
@@ -157,6 +158,10 @@ nav .menu .last-item:hover .dropdown-menu {
 
 /* Footer */
 footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
@@ -164,22 +169,29 @@ footer {
     grid-row-gap: 0px;
     justify-content: center;
     width: 1100px;
+    height: 200px;
     margin: 1rem auto;
 }
 
-footer .copy,
-footer .git {
+footer .left,
+footer .right {
+    display: grid;
+    padding: 10px;
+}
+
+footer .left .copy,
+footer .right .git {
     display: grid;
     justify-content: center;
     width: 550px;
     height: 1rem;
 }
 
-footer .copy {
+footer .left .copy {
     grid-area: 1 / 1 / 2 / 2;
 }
 
-footer .git {
+footer .right .git {
     grid-area: 1 / 2 / 2 / 3;
 }
 
@@ -200,4 +212,10 @@ footer .git {
     background-color: var(--background-error);
     color: var(--color-text-error);
     border-color: var(--color-text-error);
+}
+
+.alert-success {
+    background-color: var(--background-success);
+    color: var(--color-text-success);
+    border-color: var(--color-text-success);
 }
