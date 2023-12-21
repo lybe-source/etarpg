@@ -4,12 +4,23 @@
 
 {% block body %}
     
-    <div class="container">
+    <div class="container character">
     
         <h1>{{ title }}</h1>
 
-        <div>
+        <div class="char">
             Il faudra faire un grid afin d'afficher un personnage et ces items
+        </div>
+
+        <div class="inventory">
+
+            {% for inventoryItem in inventory %}
+                
+                <div class="card">
+                    ITEMS
+                </div>
+
+            {% endfor %}
         </div>
         
     </div>

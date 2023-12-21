@@ -49,6 +49,9 @@ class User implements UserInterface
         $this->is_banned = false;
         $this->created_at = new \DateTimeImmutable();
         $this->updated_at = new \DateTimeImmutable();
+
+        $this->inventory = new Inventory();
+        $this->inventory->setUser($this);
     }
 
     public function getId(): ?int
