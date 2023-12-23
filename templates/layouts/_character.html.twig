@@ -18,12 +18,28 @@
                 
                 <div class="card">
                 {#} 10 card 5*2 avec une pagination, les card doivent être vide si aucun item aussi non doit afficher l'image de l'item avec la stat de celui-ci en hover {#}
-                    {% if inventoryItem.items %}
-                        <p>{{ inventoryItem.items.name }}</p>
-                    {% else %}
+                    {# Vérifier si l'inventaire a des items #}
+                    {% if inventoryItem.getItems().isEmpty() %}
                         <p>Aucun item</p>
+                    {% else %}
+                        {# Parcourez les items de l'inventaire #}
+                        {% for item in inventoryItem.getItems() %}
+                            <div class="card-item">
+                                <p>{{ item.getName() }}</p>
+                                <p>{{ item.getDescription() }}</p>
+                                {% if item.getStat().isEmpty() %}
+                                    <p>Aucune statistique</p>
+                                {% else %}
+                                    <div>
+                                        {% for stat in item.getStat() %}
+                                            <p>{{ stat.getName() }}: {{ stat.getAmount() }}</p>
+                                            <p>{{ stat.getDescription() }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
                     {% endif %}
-                    ITEMS
                 </div>
 
             {% endfor %}
