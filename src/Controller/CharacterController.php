@@ -28,7 +28,10 @@ class CharacterController extends AbstractController
     public function index (Request $request): Response
     {
         $user = $this->security->getUser();
-        $inventory = $this->em->getRepository(Inventory::class)->findBy(['user' => $user]);
+        $page = $request->query->getInt('page', 1);
+
+        // $inventory = $this->em->getRepository(Inventory::class)->findBy(['user' => $user]);
+        $inventory = $this->em->getRepository(Inventory::class)->inventoryPaginated($page, ['user' => $user], 10);
 
         return $this->render('character/index.html.twig', [
             'inventory' => $inventory,
