@@ -46,6 +46,7 @@ symfony console d:m:m
 ---
 
 ## Dependencies
-
+- [Vich\UploaderBundle](https://github.com/dustin10/VichUploaderBundle)
+- [Liip\ImagineBundle](https://github.com/liip/LiipImagineBundle)
 
 ---
