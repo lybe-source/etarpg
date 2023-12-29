@@ -24,7 +24,34 @@ class InventoryRepository extends ServiceEntityRepository
     }
 
     // Paginate inventory
-    public function inventoryPaginated()
+    public function inventoryPaginated(int $page, User $user, int $limit = 10): array
     {
+        $limit = abs($limit);
+
+        $result = [];
+
+        $query = $this->getEntityManager()->createQueryBuilder()
+            ->select('i')
+            ->from('App\Entity\Inventory', 'i')
+            ->where('i.user = :user_id')
+            ->setParameter('user_id', $user->getId())
+            ->setMaxResults($limit)
+            ->setFirstResult(($limit * $page) - $limit);
+
+        $paginator = new Paginator($query);
+        $data = $paginator->getQuery()->getResult();
+
+        if (empty($data)) {
+            return $result;
+        }
+
+        $pages = ceil($paginator->count() / $limit);
+
+        $result['data'] = $data;
+        $result['pages'] = $pages;
+        $result['page'] = $page;
+        $result['limit'] = $limit;
+
+        return $result;
     }
 }
