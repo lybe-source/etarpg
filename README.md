@@ -14,7 +14,7 @@
 ## Sommary
 - [Database](#create-the-database)
 - [Create table](#create-the-table)
-- [Entity](#entity)
+- [How it works](#how-it-works)
 - [Dependencies](#dependencies)
 
 ---
@@ -40,8 +40,15 @@ symfony console d:m:m
 
 ---
 
-## Entity
-
+## How it works
+Connection to the website is by discord, and the files managing this connection are :  
+- App\Auhenticator\DiscordAuthenticator.php
+- App\Controller\Security\DiscordController.php
+- App\Service\DiscordApiService.php
+- App\Model\DiscordUser.php
+- App\Entity\User.php
+- templates\discord\check.html.twig
+- public\assets\js\check.js
 
 ---
 
