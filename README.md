@@ -50,6 +50,10 @@ Connection to the website is by discord, and the files managing this connection 
 - templates\discord\check.html.twig
 - public\assets\js\check.js
 
+All members of the discord will be able to send a command daily, enabling them to hit a monster and potentially get an item or just play money to buy items in the shop, which will be randomised every x amount of time.  
+
+The leaderboard will display all members of the discord who have run the command at least once. Whichever member has run the command, their rank will be displayed at the top of the board, followed by 1st if the member hasn't run the command, etc.  
+
 ---
 
 ## Dependencies
