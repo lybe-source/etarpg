@@ -54,4 +54,6 @@ class InventoryRepository extends ServiceEntityRepository
 
         return $result;
     }
+
+    // Cumulated score item to User
 }

@@ -22,3 +22,6 @@
 ###> File txt ###
 *.txt
 ###< File txt ###
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###

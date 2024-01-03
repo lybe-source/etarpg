@@ -7,9 +7,12 @@ use App\Entity\Inventory;
 use App\Entity\Items;
 use App\Entity\Rarity;
 use App\Entity\Statistics;
+use App\Form\_partials\Choice;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,10 +21,12 @@ class ItemsType extends AbstractType
 {
 
     private $em;
+    private $choice;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, Choice $choice)
     {
         $this->em = $em;
+        $this->choice = $choice;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -61,11 +66,20 @@ class ItemsType extends AbstractType
                 ],
                 'multiple' => true,
             ])
-            // ->add('inventories', EntityType::class, [
-            //     'class' => Inventory::class,
-            //     'choice_label' => 'id',
-            //     'multiple' => true,
-            // ])
+            ->add('score', ChoiceType::class, [
+                'label' => "Score de l'item",
+                'choices' => $this->choice->getScoreItemChoice(),
+                'row_attr' => [
+                    'class' => 'form-group'
+                ]
+            ])
+            ->add('imageFile', FileType::class, [
+                'label' => "Image de l'item",
+                'required' => false,
+                'row_attr' => [
+                    'class' => 'form-group'
+                ]
+            ])
         ;
     }
 

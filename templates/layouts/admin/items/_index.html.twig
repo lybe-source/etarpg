@@ -18,8 +18,9 @@
                     <th class="size-field-items field-name">Nom</th>
                     <th class="field-stat">Stat</th>
                     <th class="field-drop">Taux de drop</th>
-                    <th class="field-action">Actions</th>
+                    <th class="field-score">Score de l'item</th>
                     <th class="field-icon">Icon</th>
+                    <th class="field-action">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +34,16 @@
                             {% endfor %}
                         </td>
                         <td class="center">{{ item.rarity ? item.rarity.getDropRate() ~ ' %' : 'N/A' }}</td>
+                        <td class="center">{{ item.score }}</td>
+                        <td>
+                            <div class="image-cell">
+                            {% if item.filename %}
+                                <img src="{{ vich_uploader_asset(item, 'imageFile') | imagine_filter('thumb') }}" alt="">
+                            {% else %}
+                                <img src="" alt="Icon">
+                            {% endif %}
+                            </div>
+                        </td>
                         <td class="actions">
                             <a class="btn btn-edit" href="{{ path('admin_items_edit', {id: item.id}) }}" style="font-size: .9rem; text-decoration: none; padding: 8px">Éditer</a>
 
@@ -42,8 +53,6 @@
                                 <button class="btn btn-delete">Supprimer</button>
                             </form>
                         </td>
-                        <td><div class="image-cell"><img src="" alt="Icon"></td>
-                        </div>
                     </tr>
                 {% endfor %}
             </tbody>

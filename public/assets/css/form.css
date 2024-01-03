@@ -51,6 +51,10 @@
     overflow: hidden;
 }
 
+.form-new .form-group input[type="file"] {
+    margin: auto 0;
+}
+
 .form-edit .form-btn,
 .form-new button[type="submit"] {
     padding: 10px;

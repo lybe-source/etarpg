@@ -8,9 +8,13 @@ use App\Repository\ItemsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ItemsRepository::class)]
 #[ORM\Table(name: '`items`', options: ["collate" => "utf8mb4_general_ci"])]
+#[Vich\Uploadable]
 class Items
 {
     use CreatedAtTrait;
@@ -26,6 +30,15 @@ class Items
 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
+
+    #[ORM\Column(type: 'integer')]
+    private ?int $score = null;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $filename = null;
+
+    #[Vich\UploadableField(mapping: 'item_image', fileNameProperty: 'filename')]
+    private ?File $imageFile = null;
 
     #[ORM\ManyToOne(inversedBy: 'items')]
     #[ORM\JoinColumn(nullable: false)]
@@ -74,6 +87,44 @@ class Items
     public function setDescription(string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getScore(): ?int
+    {
+        return $this->score;
+    }
+
+    public function setScore(?int $score): self
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile): void
+    {
+        $this->imageFile = $imageFile;
+
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->updated_at = new \DateTimeImmutable();
+        }
+    }
+
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    public function setFilename(?string $filename): self
+    {
+        $this->filename = $filename;
 
         return $this;
     }

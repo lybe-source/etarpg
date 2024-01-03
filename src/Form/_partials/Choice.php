@@ -71,4 +71,17 @@ class Choice {
             "20" => 20
         ];
     }
+
+    /**
+     * Score items
+     * exemple : 10
+     */
+    public function getScoreItemChoice() : array 
+    {
+        return [
+            "10" => 10,
+            "20" => 20,
+            "30" => 30,
+        ];
+    }
 }
