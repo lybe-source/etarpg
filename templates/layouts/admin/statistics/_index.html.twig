@@ -23,7 +23,7 @@
             <tbody>
                 {% for stat in statistics %}
                     <tr>
-                        <td>{{ stat.name }}</td>
+                        <td class="name_cell">{{ stat.name }}</td>
                         <td class="center">{{ stat.amount }}</td>
                         <td class="actions">
                             <a class="btn btn-edit" href="{{ path('admin_statistics_edit', {id: stat.id}) }}" style="font-size: .9rem; text-decoration: none; padding: 8px">Éditer</a>

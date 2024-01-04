@@ -67,6 +67,10 @@ tbody tr td {
     text-wrap: nowrap;
 }
 
+tbody tr td.name_cell {
+    padding-left: 15px;
+}
+
 tbody tr td.center {
     text-align: center;
 }

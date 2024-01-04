@@ -10,8 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/admin/rarity', name: 'admin_rarity_')]
+#[IsGranted("ROLE_ADMIN")]
 class AdminRarityController extends AbstractController
 {
     private $cssClass = "admin";
