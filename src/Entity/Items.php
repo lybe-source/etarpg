@@ -51,15 +51,15 @@ class Items
     #[ORM\ManyToMany(targetEntity: Statistics::class, inversedBy: 'items')]
     private Collection $stat;
 
-    #[ORM\ManyToMany(targetEntity: Inventory::class, mappedBy: 'items')]
-    private Collection $inventories;
+    #[ORM\OneToMany(mappedBy: 'items', targetEntity: InventoryItems::class)]
+    private Collection $inventoryItems;
 
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
         $this->updated_at = new \DateTimeImmutable();
         $this->stat = new ArrayCollection();
-        $this->inventories = new ArrayCollection();
+        $this->inventoryItems = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -178,27 +178,30 @@ class Items
     }
 
     /**
-     * @return Collection<int, Inventory>
+     * @return Collection<int, InventoryItems>
      */
-    public function getInventories(): Collection
+    public function getInventoryItems(): Collection
     {
-        return $this->inventories;
+        return $this->inventoryItems;
     }
 
-    public function addInventory(Inventory $inventory): static
+    public function addInventoryItem(InventoryItems $inventoryItem): static
     {
-        if (!$this->inventories->contains($inventory)) {
-            $this->inventories->add($inventory);
-            $inventory->addItem($this);
+        if (!$this->inventoryItems->contains($inventoryItem)) {
+            $this->inventoryItems->add($inventoryItem);
+            $inventoryItem->setItems($this);
         }
 
         return $this;
     }
 
-    public function removeInventory(Inventory $inventory): static
+    public function removeInventoryItem(InventoryItems $inventoryItem): static
     {
-        if ($this->inventories->removeElement($inventory)) {
-            $inventory->removeItem($this);
+        if ($this->inventoryItems->removeElement($inventoryItem)) {
+            // set the owning side to null (unless already changed)
+            if ($inventoryItem->getItems() === $this) {
+                $inventoryItem->setItems(null);
+            }
         }
 
         return $this;

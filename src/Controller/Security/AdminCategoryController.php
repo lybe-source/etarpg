@@ -37,6 +37,8 @@ class AdminCategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $categoryRepo->save($category, true);
 
+            $this->addFlash('success', 'Catégorie ajoutée avec succès');
+
             return $this->redirectToRoute('admin_category_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -56,6 +58,8 @@ class AdminCategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $categoryRepo->save($category, true);
+            
+            $this->addFlash('success', 'Catégorie éditée avec succès');
 
             return $this->redirectToRoute('admin_category_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -73,6 +77,8 @@ class AdminCategoryController extends AbstractController
     {
         if ($this->isCsrfTokenValid('admin/category/delete' . $category->getId(), $request->request->get('_token'))) {
             $categoryRepo->remove($category, true);
+            
+            $this->addFlash('success', 'Catégorie supprimée avec succès');
         }
 
         return $this->redirectToRoute('admin_category_index', [], Response::HTTP_SEE_OTHER);

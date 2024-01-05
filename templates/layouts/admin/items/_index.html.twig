@@ -8,9 +8,11 @@
     
         <h1>{{ title }}</h1>
 
+        <div class="alert">
         {% for message in app.flashes('success') %}
-            <div class="alert alert-success">{{ message }}</div>
+            <div class="alert-success">{{ message }}</div>
         {% endfor %}
+        </div>
 
         <table class="tab-items">
             <thead>

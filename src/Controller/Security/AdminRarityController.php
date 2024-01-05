@@ -49,6 +49,8 @@ class AdminRarityController extends AbstractController
             $this->em->flush();
 
             $rarityRepo->save($rarity, true);
+
+            $this->addFlash('success', 'Rareté ajoutée avec succès');
             
             return $this->redirectToRoute('admin_rarity_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -71,6 +73,8 @@ class AdminRarityController extends AbstractController
             $rarity->setUpdatedAt(new \DateTimeImmutable());
             $rarityRepo->save($rarity, true);
 
+            $this->addFlash('success', 'Rareté éditée avec succès');
+
             return $this->redirectToRoute('admin_rarity_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -87,6 +91,8 @@ class AdminRarityController extends AbstractController
     {
         if ($this->isCsrfTokenValid('admin/rarity/delete' . $rarity->getId(), $request->request->get('_token'))) {
             $rarityRepo->remove($rarity, true);
+            
+            $this->addFlash('success', 'Rareté supprimée avec succès');
         }
 
         return $this->redirectToRoute('admin_rarity_index', [], Response::HTTP_SEE_OTHER);

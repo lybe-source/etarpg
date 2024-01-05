@@ -49,6 +49,8 @@ class AdminItemsController extends AbstractController
             // $this->em->flush();
 
             $itemsRepo->save($items, true);
+
+            $this->addFlash('success', 'Item ajouté avec succès');
             
             return $this->redirectToRoute('admin_items_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -70,6 +72,8 @@ class AdminItemsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $items->setUpdatedAt(new \DateTimeImmutable());
             $itemsRepo->save($items, true);
+            
+            $this->addFlash('success', 'Item édité avec succès');
 
             return $this->redirectToRoute('admin_items_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -87,6 +91,8 @@ class AdminItemsController extends AbstractController
     {
         if ($this->isCsrfTokenValid('admin/items/delete' . $items->getId(), $request->request->get('_token'))) {
             $itemsRepo->remove($items, true);
+            
+            $this->addFlash('success', 'Item supprimé avec succès');
         }
 
         return $this->redirectToRoute('admin_items_index', [], Response::HTTP_SEE_OTHER);

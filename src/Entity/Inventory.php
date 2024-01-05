@@ -25,14 +25,14 @@ class Inventory
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\ManyToMany(targetEntity: Items::class, inversedBy: 'inventories')]
-    private Collection $items;
+    #[ORM\OneToMany(mappedBy: 'inventory', targetEntity: InventoryItems::class)]
+    private Collection $inventoryItems;
 
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
         $this->updated_at = new \DateTimeImmutable();
-        $this->items = new ArrayCollection();
+        $this->inventoryItems = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -53,25 +53,31 @@ class Inventory
     }
 
     /**
-     * @return Collection<int, Items>
+     * @return Collection<int, InventoryItems>
      */
-    public function getItems(): Collection
+    public function getInventoryItems(): Collection
     {
-        return $this->items;
+        return $this->inventoryItems;
     }
 
-    public function addItem(Items $item): static
+    public function addInventoryItem(InventoryItems $inventoryItem): static
     {
-        if (!$this->items->contains($item)) {
-            $this->items->add($item);
+        if (!$this->inventoryItems->contains($inventoryItem)) {
+            $this->inventoryItems->add($inventoryItem);
+            $inventoryItem->setInventory($this);
         }
 
         return $this;
     }
 
-    public function removeItem(Items $item): static
+    public function removeInventoryItem(InventoryItems $inventoryItem): static
     {
-        $this->items->removeElement($item);
+        if ($this->inventoryItems->removeElement($inventoryItem)) {
+            // set the owning side to null (unless already changed)
+            if ($inventoryItem->getInventory() === $this) {
+                $inventoryItem->setInventory(null);
+            }
+        }
 
         return $this;
     }

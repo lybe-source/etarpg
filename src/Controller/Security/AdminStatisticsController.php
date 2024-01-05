@@ -49,6 +49,8 @@ class AdminStatisticsController extends AbstractController
             $this->em->flush();
 
             $statisticsRepo->save($statistics, true);
+
+            $this->addFlash('success', 'Statistique ajoutée avec succès');
             
             return $this->redirectToRoute('admin_statistics_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -71,6 +73,8 @@ class AdminStatisticsController extends AbstractController
             $statistics->setUpdatedAt(new \DateTimeImmutable());
             $statisticsRepo->save($statistics, true);
 
+            $this->addFlash('success', 'Statistique éditée avec succès');
+
             return $this->redirectToRoute('admin_statistics_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -87,6 +91,8 @@ class AdminStatisticsController extends AbstractController
     {
         if ($this->isCsrfTokenValid('admin/statistics/delete' . $statistics->getId(), $request->request->get('_token'))) {
             $statisticsRepo->remove($statistics, true);
+
+            $this->addFlash('success', 'Statistique supprimée avec succès');
         }
 
         return $this->redirectToRoute('admin_statistics_index', [], Response::HTTP_SEE_OTHER);
