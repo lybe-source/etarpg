@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\InventoryItems;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -21,28 +23,40 @@ class InventoryItemsRepository extends ServiceEntityRepository
         parent::__construct($registry, InventoryItems::class);
     }
 
-//    /**
-//     * @return InventoryItems[] Returns an array of InventoryItems objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('i.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    // Paginate inventory
+    public function inventoryPaginated(int $page, User $user, int $limit = 10): array
+    {
+        $limit = abs($limit);
 
-//    public function findOneBySomeField($value): ?InventoryItems
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $result = [];
+
+        $query = $this->getEntityManager()->createQueryBuilder()
+            ->select('i')
+            ->from('App\Entity\InventoryItems', 'i')
+            ->where('i.inventory = :userInventory')
+            ->setParameter('userInventory', $user->getInventory())
+            ->setMaxResults($limit)
+            ->setFirstResult(($limit * $page) - $limit);
+
+        $paginator = new Paginator($query);
+        $data = $paginator->getQuery()->getResult();
+
+        if (empty($data)) {
+            return $result;
+        }
+
+        foreach ($data as $inventoryItem) {
+            $inventoryItem->getItems()->initializeLazyObject();
+        }
+
+        $pages = ceil($paginator->count() / $limit);
+
+        $result['data'] = $data;
+        $result['pages'] = $pages;
+        $result['page'] = $page;
+        $result['limit'] = $limit;
+
+        return $result;
+    }
+
 }

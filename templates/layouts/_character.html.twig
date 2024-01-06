@@ -14,47 +14,47 @@
 
         <div class="inventory">
 
-            {% for inventoryItem in inventory.data %}
-                
-                <div class="card">
-                {#} 10 card 5*2 avec une pagination, les card doivent être vide si aucun item aussi non doit afficher l'image de l'item avec la stat de celui-ci en hover {#}
+            {# Vérifier si l'inventaire a des items #}
+            {% if inventory is not empty %}
+                {# Parcourez les items de l'inventaire #}
+                {% for inventoryItem in inventory['data'] %}
+
+                    {#} 10 card 5*2 avec une pagination, les card doivent être vide si aucun item aussi non doit afficher l'image de l'item avec la stat de celui-ci en hover {#}
                     {# <div class="inventory-grid">
                         {% for slot in range(1, 11) %}
                             {% set itemInSlot = inventoryItem.items[loop.index0] ?? null %}
-                            <div class="grid-item">
-                                {% if itemInSlot is not null %}
-                                    <img src="{{ path('', { 'item': itemInSlot.id }) }}" alt="{{ itemInSlot.name }}">
-                                {% else %}
-                                    <img src="{{ path('') }}" alt="Empty Slot">
-                                {% endif %}
-                            </div>
+                                <div class="grid-item">
+                                    {% if itemInSlot is not null %}
+                                        <img src="{{ vich_uploader_asset(itemInSlot, 'imageFile') | imagine_filter('thumb') }}" alt="{{ itemInSlot.name }}">
+                                    {% else %}
+                                        <img src="{{ path('', { 'item': itemInSlot.id }) }}" alt="{{ itemInSlot.name }}" alt="Empty Slot">
+                                    {% endif %}
+                                </div>
                         {% endfor %}
                     </div> #}
-                    {# Vérifier si l'inventaire a des items #}
-                    {% if inventoryItem.items is not empty %}
-                        {# Parcourez les items de l'inventaire #}
-                        {% for item in inventoryItem.items %}
-                            <div class="card-item">
-                                <p>{{ item.name }}</p>
-                                <p>{{ item.description }}</p>
-                                {% if item.stat is empty %}
-                                    <p>Aucune statistique</p>
-                                {% else %}
-                                    <div>
-                                        {% for stat in item.stat %}
-                                            <p>{{ stat.name }}: {{ stat.amount }}</p>
-                                            <p>{{ stat.description }}</p>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <p>Aucun item</p>
-                    {% endif %}
-                </div>
 
-            {% endfor %}
+                    <div class="card">
+                        <div class="card-item">
+                            <p><img src="{{ vich_uploader_asset(inventoryItem.items, 'imageFile') | imagine_filter('medium') }}" alt="{{ inventoryItem.items.name }}"></p>
+                            <p>{{ inventoryItem.items.name }}</p>
+                            <p>{{ inventoryItem.items.description }}</p>
+                            {% if inventoryItem.items.stat is empty %}
+                                <p>Aucune statistique</p>
+                            {% else %}
+                                <div>
+                                    {% for stat in inventoryItem.items.stat %}
+                                        <p>{{ stat.name }}: {{ stat.amount }}</p>
+                                        <p>{{ stat.description }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                {% endfor %}
+            {% else %}
+                <p>Aucun item</p>
+            {% endif %}
         </div>
         
     </div>

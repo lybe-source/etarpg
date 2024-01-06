@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Inventory;
+use App\Entity\InventoryItems;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -30,7 +30,7 @@ class CharacterController extends AbstractController
         $user = $this->security->getUser();
         $page = $request->query->getInt('page', 1);
 
-        $inventoryData = $this->em->getRepository(Inventory::class)->inventoryPaginated($page, $user, 10);
+        $inventoryData = $this->em->getRepository(InventoryItems::class)->inventoryPaginated($page, $user, 10);
 
         return $this->render('character/index.html.twig', [
             'inventory' => $inventoryData,
