@@ -7,14 +7,14 @@ liip_imagine:
       thumb:
         quality: 75
         filters:
-          thumbnail: { size: [360, 230], mode: outbound }
+          thumbnail: { size: [360, 230], mode: outbound } # outbound crop the image
       
       medium:
         quality: 75
         filters:
-          thumbnail: { size: [880, 530], mode: outbound }
+          thumbnail: { size: [880, 530], mode: inset }
 
       card:
         quality: 75
         filters:
-          thumbnail: { size: [1000, 600], mode: outbound}
+          thumbnail: { size: [150, 150], mode: inset}

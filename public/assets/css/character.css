@@ -1,3 +1,69 @@
 .character {
     display: grid;
 }
+
+.character-grid {
+    display: grid;
+    grid-template-areas: "char inventory";
+}
+
+.character-grid .char {
+    grid-area: char;
+    width: 600px;
+}
+
+.character-grid .inventory {
+    grid-area: inventory;
+
+}
+
+.inventory .char-cat {
+    display: grid;
+    grid-template-areas:    "cat"
+                            "image";
+    
+}
+
+.inventory .char-cat h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: cat;
+}
+
+.inventory .char-cat .card {
+    width: 200px;
+    height: 155px;
+    grid-area: image;
+}
+
+.inventory .char-cat .card .card-item {
+    position: relative;
+    display: grid;
+    grid-template-areas:    "image"
+                            "features";
+}
+
+.inventory .char-cat .card .card-item .item-image {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 155px;
+    cursor: pointer;
+    grid-area: image;
+}
+
+.inventory .char-cat .card .card-item .item-feature {
+    position: absolute;
+    width: 200px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, .6);
+    border-radius: 10px;
+    grid-area: features;
+    display: none;
+}
+
+.inventory .char-cat .card .card-item .item-image:hover .item-feature {
+    display: block;
+}
