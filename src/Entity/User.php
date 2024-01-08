@@ -40,6 +40,9 @@ class User implements UserInterface
     
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private ?bool $is_banned = false;
+    
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
+    private ?bool $has_played = false;
 
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Inventory $inventory = null;
@@ -47,6 +50,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->is_banned = false;
+        $this->has_played = false;
         $this->created_at = new \DateTimeImmutable();
         $this->updated_at = new \DateTimeImmutable();
 
@@ -156,6 +160,18 @@ class User implements UserInterface
     public function setIsBanned(bool $is_banned): static
     {
         $this->is_banned = $is_banned;
+
+        return $this;
+    }
+
+    public function isHasPlayed(): ?bool
+    {
+        return $this->has_played;
+    }
+
+    public function setHasPlayed(bool $has_played): static
+    {
+        $this->has_played = $has_played;
 
         return $this;
     }
