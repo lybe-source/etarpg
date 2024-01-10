@@ -64,3 +64,8 @@ The leaderboard will display all members of the discord who have run the command
 - [FakerPHP\Faker](https://github.com/FakerPHP/Faker)
 
 ---
+
+## TODO
+- DataFixtures
+- Check inventory display
+- Leaderboard
