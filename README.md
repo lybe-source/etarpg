@@ -67,8 +67,8 @@ The leaderboard will display all members of the discord who have run the command
 
 ## TODO
 - DataFixtures
- - UserFixtures
- - ItemsFixtures
- - InventoryItemsFixtures
+    - UserFixtures
+    - ItemsFixtures
+    - InventoryItemsFixtures
 - Check inventory display
 - Leaderboard
