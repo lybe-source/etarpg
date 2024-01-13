@@ -21,7 +21,7 @@
     display: grid;
     grid-template-areas:    "cat"
                             "image";
-    
+    margin-bottom: 1rem;
 }
 
 .inventory .char-cat h2 {

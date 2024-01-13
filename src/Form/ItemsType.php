@@ -59,12 +59,13 @@ class ItemsType extends AbstractType
             ])
             ->add('stat', EntityType::class, [
                 'class' => Statistics::class,
-                'choice_label' => 'name',
+                'choice_label' => function (Statistics $stat = null) {
+                    return $stat ? $stat->getName() . ' - ' . $stat->getAmount() : '';
+                },
                 'choices' => $this->em->getRepository(Statistics::class)->findAll(),
                 'row_attr' => [
                     'class' => 'form-group'
-                ],
-                'multiple' => true,
+                ]
             ])
             ->add('score', ChoiceType::class, [
                 'label' => "Score de l'item",

@@ -26,6 +26,18 @@ class Choice {
     public function getStatNameChoice(): array
     {
         return [
+            "Armure" => "Armure",
+            "Force" => "Force",
+            "Vitesse de frappe" => "Vitesse de frappe"
+        ];
+    }
+
+    /**
+     * Description des statistiques
+     */
+    public function getDescriptionChoice(): array
+    {
+        return [
             "Très faible" => "Très faible", // Very weak
             "Faible" => "Faible", // Weak
             "Bonne" => "Bonne", // Good

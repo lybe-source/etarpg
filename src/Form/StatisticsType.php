@@ -46,8 +46,9 @@ class StatisticsType extends AbstractType
                     'style' => 'display:none'
                 ],
             ])
-            ->add('description', TextType::class, [
+            ->add('description', ChoiceType::class, [
                 'label' => 'Description',
+                'choices' => $this->choice->getDescriptionChoice(),
                 'row_attr' => [
                     'class' => 'form-group'
                 ],

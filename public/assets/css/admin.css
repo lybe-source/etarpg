@@ -1,3 +1,11 @@
+.admin-body {
+    overflow: auto;
+}
+
+.admin-body footer {
+    position: relative;
+}
+
 .container.admin .cat,
 .container.admin .rarity,
 .container.admin .stat,

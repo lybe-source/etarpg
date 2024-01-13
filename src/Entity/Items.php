@@ -48,8 +48,9 @@ class Items
     #[ORM\JoinColumn(nullable: false)]
     private ?Rarity $rarity = null;
 
-    #[ORM\ManyToMany(targetEntity: Statistics::class, inversedBy: 'items')]
-    private Collection $stat;
+    #[ORM\ManyToOne(inversedBy: 'items')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Statistics $stat = null;
 
     #[ORM\OneToMany(mappedBy: 'items', targetEntity: InventoryItems::class)]
     private Collection $inventoryItems;
@@ -58,7 +59,6 @@ class Items
     {
         $this->created_at = new \DateTimeImmutable();
         $this->updated_at = new \DateTimeImmutable();
-        $this->stat = new ArrayCollection();
         $this->inventoryItems = new ArrayCollection();
     }
 
@@ -153,26 +153,14 @@ class Items
         return $this;
     }
 
-    /**
-     * @return Collection<int, Statistics>
-     */
-    public function getStat(): Collection
+    public function getStat(): ?Statistics
     {
         return $this->stat;
     }
 
-    public function addStat(Statistics $stat): static
+    public function setStat(Statistics $stat): static
     {
-        if (!$this->stat->contains($stat)) {
-            $this->stat->add($stat);
-        }
-
-        return $this;
-    }
-
-    public function removeStat(Statistics $stat): static
-    {
-        $this->stat->removeElement($stat);
+        $this->stat = $stat;
 
         return $this;
     }

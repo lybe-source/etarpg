@@ -44,17 +44,14 @@
                                         <img src="{{ vich_uploader_asset(inventoryItem.items, 'imageFile') | imagine_filter('card') }}" alt="{{ inventoryItem.items.name }}">
                                         <div class="item-feature">
                                             <p>{{ inventoryItem.items.name }}</p>
-                                            <p>{{ inventoryItem.items.description }}</p>
                                             {% if inventoryItem.items.stat is empty %}
                                                 <p>Aucune statistique</p>
                                             {% else %}
                                                 <div class="item-stat">
-                                                    {% for stat in inventoryItem.items.stat %}
-                                                        <p>{{ stat.name }}: {{ stat.amount }}</p>
-                                                        <p>{{ stat.description }}</p>
-                                                    {% endfor %}
+                                                    <p>{{ inventoryItem.items.stat.name }} : {{ inventoryItem.items.stat.amount }}</p>
                                                 </div>
                                             {% endif %}
+                                            <p>Score : {{ inventoryItem.items.score }}</p>
                                         </div>
                                     </div>
 

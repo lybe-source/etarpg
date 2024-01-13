@@ -30,7 +30,7 @@ class Statistics
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\ManyToMany(targetEntity: Items::class, mappedBy: 'stat')]
+    #[ORM\OneToMany(mappedBy: 'rarity', targetEntity: Items::class)]
     private Collection $items;
 
     public function __construct()
@@ -93,7 +93,7 @@ class Statistics
     {
         if (!$this->items->contains($item)) {
             $this->items->add($item);
-            $item->addStat($this);
+            $item->setStat($this);
         }
 
         return $this;
@@ -102,7 +102,10 @@ class Statistics
     public function removeItem(Items $item): static
     {
         if ($this->items->removeElement($item)) {
-            $item->removeStat($this);
+            // set the owning side to null (unless already changed)
+            if ($item->getStat() === $this) {
+                $item->setStat(null);
+            }
         }
 
         return $this;

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin-base.html.twig' %}
 
 {% block title %}{{ title }}{% endblock %}
 
@@ -30,10 +30,7 @@
                     <tr>
                         <td class="name_cell">{{ item.name }}</td>
                         <td class="center">
-                            {% for stat in item.stat %}
-                                {{ stat.amount }}
-                                {% if not loop.last %}, {% endif %}
-                            {% endfor %}
+                            {{ item.stat.name }} : {{ item.stat.amount }}
                         </td>
                         <td class="center">{{ item.rarity ? item.rarity.getDropRate() ~ ' %' : 'N/A' }}</td>
                         <td class="center">{{ item.score }}</td>
