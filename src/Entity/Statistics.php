@@ -30,7 +30,7 @@ class Statistics
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\OneToMany(mappedBy: 'rarity', targetEntity: Items::class)]
+    #[ORM\OneToMany(mappedBy: 'stat', targetEntity: Items::class)]
     private Collection $items;
 
     public function __construct()

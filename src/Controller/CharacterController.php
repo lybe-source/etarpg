@@ -32,8 +32,15 @@ class CharacterController extends AbstractController
 
         $inventoryData = $this->em->getRepository(InventoryItems::class)->inventoryPaginated($page, $user, 10);
 
+        $itemsByCategory = [];
+        foreach ($inventoryData['data'] as $intentoryItem) {
+            $categoryName = $intentoryItem->getItems()->getCategory()->getName();
+            $itemsByCategory[$categoryName][] = $intentoryItem;
+        }
+
         return $this->render('character/index.html.twig', [
-            'inventory' => $inventoryData,
+            // 'inventory' => $inventoryData,
+            'inventory' => $itemsByCategory,
             'cssClass' => $this->cssClass,
         ]);
     }

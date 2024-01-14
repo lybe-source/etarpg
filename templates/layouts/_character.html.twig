@@ -18,7 +18,7 @@
                 {# Vérifier si l'inventaire a des items #}
                 {% if inventory is not empty %}
                     {# Parcourez les items de l'inventaire #}
-                    {% for inventoryItem in inventory['data'] %}
+                    {% for category, items in inventory %}
 
                         {#} 10 card 5*2 avec une pagination, les card doivent être vide si aucun item aussi non doit afficher l'image de l'item avec la stat de celui-ci en hover {#}
                         {# <div class="inventory-grid">
@@ -35,10 +35,10 @@
                         </div> #}
 
                         <div class="char-cat">
-                            <h2>{{ inventoryItem.items.category.name }}</h2>
+                            <h2>{{ category }}</h2>
 
                             <div class="card">
-                                {# boucle #}
+                                {% for inventoryItem in items %}
                                 <div class="card-item">
                                     <div class="item-image">
                                         <img src="{{ vich_uploader_asset(inventoryItem.items, 'imageFile') | imagine_filter('card') }}" alt="{{ inventoryItem.items.name }}">
@@ -56,7 +56,7 @@
                                     </div>
 
                                 </div>
-                                {# Fin de boucle #}
+                                {% endfor %}
                             </div>
 
                         </div>

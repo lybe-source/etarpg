@@ -14,7 +14,7 @@
 
 .character-grid .inventory {
     grid-area: inventory;
-
+    width: 400px;
 }
 
 .inventory .char-cat {
@@ -32,6 +32,8 @@
 }
 
 .inventory .char-cat .card {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     width: 200px;
     height: 155px;
     grid-area: image;
@@ -42,6 +44,8 @@
     display: grid;
     grid-template-areas:    "image"
                             "features";
+    margin: .5rem;
+    border: 1px solid green;
 }
 
 .inventory .char-cat .card .card-item .item-image {
