@@ -152,13 +152,13 @@ class Items
 
         return $this;
     }
-
+    
     public function getStat(): ?Statistics
     {
         return $this->stat;
     }
 
-    public function setStat(Statistics $stat): static
+    public function setStat(?Statistics $stat): static
     {
         $this->stat = $stat;
 

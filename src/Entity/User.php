@@ -47,6 +47,9 @@ class User implements UserInterface
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Inventory $inventory = null;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Leaderboard $leaderboard = null;
+
     public function __construct()
     {
         $this->is_banned = false;
@@ -56,6 +59,9 @@ class User implements UserInterface
 
         $this->inventory = new Inventory();
         $this->inventory->setUser($this);
+
+        $this->leaderboard = new Leaderboard();
+        $this->leaderboard->setUser($this);
     }
 
     public function getId(): ?int
@@ -197,6 +203,28 @@ class User implements UserInterface
         }
 
         $this->inventory = $inventory;
+
+        return $this;
+    }
+
+    public function getLeaderboard(): ?Leaderboard
+    {
+        return $this->leaderboard;
+    }
+
+    public function setLeaderboard(?Leaderboard $leaderboard): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($leaderboard === null && $this->leaderboard !== null) {
+            $this->leaderboard->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($leaderboard !== null && $leaderboard->getUser() !== $this) {
+            $leaderboard->setUser($this);
+        }
+
+        $this->leaderboard = $leaderboard;
 
         return $this;
     }
