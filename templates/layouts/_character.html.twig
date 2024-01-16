@@ -20,20 +20,6 @@
                     {# Parcourez les items de l'inventaire #}
                     {% for category, items in inventory %}
 
-                        {#} 10 card 5*2 avec une pagination, les card doivent être vide si aucun item aussi non doit afficher l'image de l'item avec la stat de celui-ci en hover {#}
-                        {# <div class="inventory-grid">
-                            {% for slot in range(1, 11) %}
-                                {% set itemInSlot = inventoryItem.items[loop.index0] ?? null %}
-                                    <div class="grid-item">
-                                        {% if itemInSlot is not null %}
-                                            <img src="{{ vich_uploader_asset(itemInSlot, 'imageFile') | imagine_filter('thumb') }}" alt="{{ itemInSlot.name }}">
-                                        {% else %}
-                                            <img src="{{ path('', { 'item': itemInSlot.id }) }}" alt="{{ itemInSlot.name }}" alt="Empty Slot">
-                                        {% endif %}
-                                    </div>
-                            {% endfor %}
-                        </div> #}
-
                         <div class="char-cat">
                             <h2>{{ category }}</h2>
 

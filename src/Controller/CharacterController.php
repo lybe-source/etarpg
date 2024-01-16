@@ -29,17 +29,22 @@ class CharacterController extends AbstractController
     {
         $user = $this->security->getUser();
         $page = $request->query->getInt('page', 1);
+        $limit = 10;
 
-        $inventoryData = $this->em->getRepository(InventoryItems::class)->inventoryPaginated($page, $user, 10);
+        $inventoryData = $this->em->getRepository(InventoryItems::class)->inventoryPaginated($page, $user, $limit);
+
+        // Check if the "data" key exists in $inventoryData
+        if (!array_key_exists('data', $inventoryData)) {
+            $inventoryData['data'] = [];
+        }
 
         $itemsByCategory = [];
-        foreach ($inventoryData['data'] as $intentoryItem) {
-            $categoryName = $intentoryItem->getItems()->getCategory()->getName();
-            $itemsByCategory[$categoryName][] = $intentoryItem;
+        foreach ($inventoryData['data'] as $inventoryItem) {
+            $categoryName = $inventoryItem->getItems()->getCategory()->getName();
+            $itemsByCategory[$categoryName][] = $inventoryItem;
         }
 
         return $this->render('character/index.html.twig', [
-            // 'inventory' => $inventoryData,
             'inventory' => $itemsByCategory,
             'cssClass' => $this->cssClass,
         ]);
