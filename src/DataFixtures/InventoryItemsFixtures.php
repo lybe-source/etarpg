@@ -2,16 +2,16 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Items;
+use App\Entity\InventoryItems;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class ItemsFixtures extends Fixture
+class InventoryItemsFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $item = new Items();
-        $manager->persist($item);
+        $inventoryItems = new InventoryItems();
+        $manager->persist($inventoryItems);
 
         $manager->flush();
     }
