@@ -47,21 +47,12 @@ class User implements UserInterface
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Inventory $inventory = null;
 
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Leaderboard $leaderboard = null;
-
     public function __construct()
     {
         $this->is_banned = false;
         $this->has_played = false;
         $this->created_at = new \DateTimeImmutable();
         $this->updated_at = new \DateTimeImmutable();
-
-        $this->inventory = new Inventory();
-        $this->inventory->setUser($this);
-
-        $this->leaderboard = new Leaderboard();
-        $this->leaderboard->setUser($this);
     }
 
     public function getId(): ?int
@@ -163,7 +154,7 @@ class User implements UserInterface
         return $this->is_banned;
     }
 
-    public function setIsBanned(bool $is_banned): static
+    public function setIsBanned(bool $is_banned): self
     {
         $this->is_banned = $is_banned;
 
@@ -175,7 +166,7 @@ class User implements UserInterface
         return $this->has_played;
     }
 
-    public function setHasPlayed(bool $has_played): static
+    public function setHasPlayed(bool $has_played): self
     {
         $this->has_played = $has_played;
 
@@ -195,7 +186,7 @@ class User implements UserInterface
         return $this->inventory;
     }
 
-    public function setInventory(Inventory $inventory): static
+    public function setInventory(Inventory $inventory): self
     {
         // set the owning side of the relation if necessary
         if ($inventory->getUser() !== $this) {
@@ -203,28 +194,6 @@ class User implements UserInterface
         }
 
         $this->inventory = $inventory;
-
-        return $this;
-    }
-
-    public function getLeaderboard(): ?Leaderboard
-    {
-        return $this->leaderboard;
-    }
-
-    public function setLeaderboard(?Leaderboard $leaderboard): static
-    {
-        // unset the owning side of the relation if necessary
-        if ($leaderboard === null && $this->leaderboard !== null) {
-            $this->leaderboard->setUser(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($leaderboard !== null && $leaderboard->getUser() !== $this) {
-            $leaderboard->setUser($this);
-        }
-
-        $this->leaderboard = $leaderboard;
 
         return $this;
     }

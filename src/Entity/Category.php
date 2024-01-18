@@ -44,7 +44,7 @@ class Category
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -59,7 +59,7 @@ class Category
         return $this->items;
     }
 
-    public function addItem(Items $item): static
+    public function addItem(Items $item): self
     {
         if (!$this->items->contains($item)) {
             $this->items->add($item);
@@ -69,7 +69,7 @@ class Category
         return $this;
     }
 
-    public function removeItem(Items $item): static
+    public function removeItem(Items $item): self
     {
         if ($this->items->removeElement($item)) {
             // set the owning side to null (unless already changed)

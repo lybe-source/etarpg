@@ -3,6 +3,7 @@
 namespace App\Controller\Security;
 
 use App\Authenticator\DiscordAuthenticator;
+use App\Entity\Inventory;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Service\DiscordApiService;
@@ -73,6 +74,15 @@ class DiscordController extends AbstractController
         $user->setDiscordId($discordUser->id);
         $user->setAvatar($discordUser->avatar);
         $user->setAccessToken($accessToken);
+
+        $inventory = new Inventory();
+        
+        $inventory->setUser($user);
+        $inventory->setTotalScore(0);
+
+        $em->persist($inventory);
+
+        $user->setInventory($inventory);
 
         $em->persist($user);
         $em->flush();

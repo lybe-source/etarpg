@@ -44,7 +44,7 @@ class InventoryItems
         return $this->inventory;
     }
 
-    public function setInventory(?Inventory $inventory): static
+    public function setInventory(?Inventory $inventory): self
     {
         $this->inventory = $inventory;
 
@@ -56,7 +56,7 @@ class InventoryItems
         return $this->items;
     }
 
-    public function setItems(?Items $items): static
+    public function setItems(?Items $items): self
     {
         $this->items = $items;
 
@@ -68,7 +68,7 @@ class InventoryItems
         return $this->is_used;
     }
 
-    public function setIsUsed(bool $is_used): static
+    public function setIsUsed(bool $is_used): self
     {
         $this->is_used = $is_used;
 

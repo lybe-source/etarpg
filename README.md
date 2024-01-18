@@ -38,6 +38,11 @@ OR
 symfony console d:m:m
 ```
 
+## Run the datafixtures
+```bash
+symfony console doctrine:fixtures:load
+```
+
 ---
 
 ## How it works

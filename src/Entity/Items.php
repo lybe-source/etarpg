@@ -72,7 +72,7 @@ class Items
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -84,7 +84,7 @@ class Items
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -134,7 +134,7 @@ class Items
         return $this->category;
     }
 
-    public function setCategory(?Category $category): static
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
 
@@ -146,7 +146,7 @@ class Items
         return $this->rarity;
     }
 
-    public function setRarity(?Rarity $rarity): static
+    public function setRarity(?Rarity $rarity): self
     {
         $this->rarity = $rarity;
 
@@ -158,7 +158,7 @@ class Items
         return $this->stat;
     }
 
-    public function setStat(?Statistics $stat): static
+    public function setStat(?Statistics $stat): self
     {
         $this->stat = $stat;
 
@@ -173,7 +173,7 @@ class Items
         return $this->inventoryItems;
     }
 
-    public function addInventoryItem(InventoryItems $inventoryItem): static
+    public function addInventoryItem(InventoryItems $inventoryItem): self
     {
         if (!$this->inventoryItems->contains($inventoryItem)) {
             $this->inventoryItems->add($inventoryItem);
@@ -183,7 +183,7 @@ class Items
         return $this;
     }
 
-    public function removeInventoryItem(InventoryItems $inventoryItem): static
+    public function removeInventoryItem(InventoryItems $inventoryItem): self
     {
         if ($this->inventoryItems->removeElement($inventoryItem)) {
             // set the owning side to null (unless already changed)

@@ -14,19 +14,20 @@ class StatisticsFixtures extends Fixture
         $statsDesc = ["Très faible", "Faible", "Bonne", "Très bonne"];
         $stats = [5, 10, 15, 20];
 
-        foreach ($statsName as $indexName => $statName) {
+        foreach ($statsName as $nameIndex => $statName) {
 
-            foreach ($stats as $index => $stat) {
+            foreach ($stats as $statIndex => $stat) {
+                $index = ($nameIndex * count($stats)) + $statIndex;
                 $statistics = new Statistics();
     
                 // Stat setter
                 $statistics->setName($statName);
                 $statistics->setAmount($stat);
-                $statistics->setDescription($statsDesc[$index]);
+                $statistics->setDescription($statsDesc[$statIndex]);
     
                 $manager->persist($statistics);
     
-                $this->addReference('stat-' . $index, $statistics);
+                $this->setReference('stat-' . $index, $statistics);
             }
         }
 

@@ -50,7 +50,7 @@ class Rarity
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -62,7 +62,7 @@ class Rarity
         return $this->drop_rate;
     }
 
-    public function setDropRate(int $drop_rate): static
+    public function setDropRate(int $drop_rate): self
     {
         $this->drop_rate = $drop_rate;
 
@@ -74,7 +74,7 @@ class Rarity
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -89,7 +89,7 @@ class Rarity
         return $this->items;
     }
 
-    public function addItem(Items $item): static
+    public function addItem(Items $item): self
     {
         if (!$this->items->contains($item)) {
             $this->items->add($item);
@@ -99,7 +99,7 @@ class Rarity
         return $this;
     }
 
-    public function removeItem(Items $item): static
+    public function removeItem(Items $item): self
     {
         if ($this->items->removeElement($item)) {
             // set the owning side to null (unless already changed)

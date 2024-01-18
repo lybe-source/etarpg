@@ -28,6 +28,10 @@ class Inventory
     #[ORM\OneToMany(mappedBy: 'inventory', targetEntity: InventoryItems::class)]
     private Collection $inventoryItems;
 
+    #[ORM\Column(type: 'integer', options: ['default' => 0])]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?int $totalScore = null;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
@@ -45,7 +49,7 @@ class Inventory
         return $this->user;
     }
 
-    public function setUser(User $user): static
+    public function setUser(User $user): self
     {
         $this->user = $user;
 
@@ -60,7 +64,7 @@ class Inventory
         return $this->inventoryItems;
     }
 
-    public function addInventoryItem(InventoryItems $inventoryItem): static
+    public function addInventoryItem(InventoryItems $inventoryItem): self
     {
         if (!$this->inventoryItems->contains($inventoryItem)) {
             $this->inventoryItems->add($inventoryItem);
@@ -70,7 +74,7 @@ class Inventory
         return $this;
     }
 
-    public function removeInventoryItem(InventoryItems $inventoryItem): static
+    public function removeInventoryItem(InventoryItems $inventoryItem): self
     {
         if ($this->inventoryItems->removeElement($inventoryItem)) {
             // set the owning side to null (unless already changed)
@@ -78,6 +82,18 @@ class Inventory
                 $inventoryItem->setInventory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTotalScore(): ?int
+    {
+        return $this->totalScore;
+    }
+
+    public function setTotalScore(?int $totalScore): self
+    {
+        $this->totalScore = $totalScore;
 
         return $this;
     }

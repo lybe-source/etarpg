@@ -2,33 +2,43 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Inventory;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Faker;
 
-class UserFixtures extends Fixture implements DependentFixtureInterface
+class UserFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        for ($i = 1; $i <= 10; $i++) {
+        $faker = Faker\Factory::create('fr_FR');
+
+        for ($i = 0; $i < 10; $i++) {
             $user = new User();
 
-            // User setter
-            $user->setUsername();
-            $user->setEmail();
+            // User setter with Faker
+            $replace = array(" ", ".");
+            $user->setUsername(str_replace($replace, '_', $faker->name()));
+            $user->setEmail($faker->email());
 
-            $user->setDiscordId(); // string
-            $user->setAvatar(); // string
-            $user->setAccessToken(); // string
+            $user->setDiscordId(str_replace($replace, 'x', $faker->text(32))); // string
+            $user->setAvatar(str_replace($replace, 'x', $faker->text(32))); // string
+            $user->setAccessToken(str_replace($replace, 'x', $faker->text())); // string
+            
+            $inventory = new Inventory();
+        
+            $inventory->setUser($user);
+            $inventory->setTotalScore(0);
 
-            // $user->setInventory(); // user id
+            $manager->persist($inventory);
 
-            // $user->setLeaderboard(); // user id
+            $user->setInventory($inventory);
 
             $manager->persist($user);
 
             $this->addReference('user-' . $i, $user);
+            $this->addReference('inventory-' . $i, $inventory);
         }
 
         $manager->flush();
@@ -39,10 +49,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         return $this->getReference('user-' . $i);
     }
 
-    public function getDependencies(): array
+    public function getInventoryByIndex($i)
     {
-        return [
-            InventoryItemsFixtures::class
-        ];
+        return $this->getReference('inventory-' . $i);
     }
 }
