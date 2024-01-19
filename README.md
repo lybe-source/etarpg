@@ -14,6 +14,7 @@
 ## Sommary
 - [Database](#create-the-database)
 - [Create table](#create-the-table)
+- [Run the Datafixtures](#run-the-datafixtures)
 - [How it works](#how-it-works)
 - [Dependencies](#dependencies)
 
