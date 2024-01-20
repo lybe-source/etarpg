@@ -32,6 +32,10 @@ class Inventory
     #[ORM\JoinColumn(nullable: true)]
     private ?int $totalScore = null;
 
+    #[ORM\Column(type: 'integer', options: ['default' => 0])]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?int $money = null;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
@@ -94,6 +98,18 @@ class Inventory
     public function setTotalScore(?int $totalScore): self
     {
         $this->totalScore = $totalScore;
+
+        return $this;
+    }
+
+    public function getMoney(): ?int
+    {
+        return $this->money;
+    }
+
+    public function setMoney(?int $money): self
+    {
+        $this->money = $money;
 
         return $this;
     }
