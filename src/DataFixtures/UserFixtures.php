@@ -30,6 +30,7 @@ class UserFixtures extends Fixture
         
             $inventory->setUser($user);
             $inventory->setTotalScore(0);
+            $inventory->setMoney(0);
 
             $manager->persist($inventory);
 

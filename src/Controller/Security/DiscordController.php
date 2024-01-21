@@ -79,6 +79,7 @@ class DiscordController extends AbstractController
         
         $inventory->setUser($user);
         $inventory->setTotalScore(0);
+        $inventory->setMoney(0);
 
         $em->persist($inventory);
 
