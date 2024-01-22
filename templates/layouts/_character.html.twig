@@ -13,6 +13,12 @@
                 Il faudra faire un grid afin d'afficher un personnage et ces items
             </div>
 
+            <div class="money">
+                {% for coins in money %}
+                    Monnaie : {{ coins.money }}
+                {% endfor %}
+            </div>
+
             <div class="inventory">
 
                 {# Vérifier si l'inventaire a des items #}

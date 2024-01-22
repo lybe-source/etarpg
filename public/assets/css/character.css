@@ -4,11 +4,17 @@
 
 .character-grid {
     display: grid;
-    grid-template-areas: "char inventory";
+    grid-template-areas:    "char inventory"
+                            "money inventory";
 }
 
 .character-grid .char {
     grid-area: char;
+    width: 600px;
+}
+
+.character-grid .money {
+    grid-area: money;
     width: 600px;
 }
 

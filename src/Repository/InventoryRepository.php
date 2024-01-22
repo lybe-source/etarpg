@@ -24,4 +24,8 @@ class InventoryRepository extends ServiceEntityRepository
     }
 
     // Cumulated score item to User
+    public function totalScoreQuery()
+    {
+        
+    }
 }

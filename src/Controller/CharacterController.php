@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Inventory;
 use App\Entity\InventoryItems;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,6 +33,7 @@ class CharacterController extends AbstractController
         $limit = 10;
 
         $inventoryData = $this->em->getRepository(InventoryItems::class)->inventoryPaginated($page, $user, $limit);
+        $money = $this->em->getRepository(Inventory::class)->findBy(['user' => $user]);
 
         // Check if the "data" key exists in $inventoryData
         if (!array_key_exists('data', $inventoryData)) {
@@ -45,6 +47,7 @@ class CharacterController extends AbstractController
         }
 
         return $this->render('character/index.html.twig', [
+            'money' => $money,
             'inventory' => $itemsByCategory,
             'cssClass' => $this->cssClass,
         ]);
