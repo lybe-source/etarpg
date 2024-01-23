@@ -9,8 +9,24 @@
         <h1>{{ title }}</h1>
 
         <div>
-            Il faudra faire un tableau reprenant tout les membres du serveur discord
+            Il faudra faire un tableau reprenant tout les membres du serveur discord <br />
             Il faudra que le membre connecté soit dans la ligne tout au dessus avec son rank et la 2ème ligne serait le premier du leaderboard
+
+            <table>
+                <thead>
+                    <th>Membre</th>
+                    <th>Score</th>
+                </thead>
+
+                <tbody>
+                    {% for user in usersWithScores %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.score }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
         
     </div>
