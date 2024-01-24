@@ -6,7 +6,6 @@ use App\Entity\Inventory;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Bundle\SecurityBundle\Security;
 
 /**
  * @extends ServiceEntityRepository<Inventory>
@@ -18,12 +17,9 @@ use Symfony\Bundle\SecurityBundle\Security;
  */
 class InventoryRepository extends ServiceEntityRepository
 {
-    private $security;
-
-    public function __construct(ManagerRegistry $registry, Security $security)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Inventory::class);
-        $this->security = $security;
     }
 
     public function totalScoreQuery(User $user): ?int
