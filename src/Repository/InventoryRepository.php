@@ -22,6 +22,9 @@ class InventoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Inventory::class);
     }
 
+    /**
+     * Total score calculation for the user
+     */
     public function totalScoreQuery(User $user): ?int
     {
         $inventory = $this->findOneBy(['user' => $user]);
@@ -41,6 +44,9 @@ class InventoryRepository extends ServiceEntityRepository
         return $totalScore;
     }
 
+    /**
+     * Total score for all users
+     */
     public function totalScoreAllUser(): array
     {
         $users = $this->_em->getRepository(User::class)->findAll();
@@ -54,6 +60,9 @@ class InventoryRepository extends ServiceEntityRepository
         return $totalScores;
     }
 
+    /**
+     * Get the score of all users in ascending order, putting the logged-in user first
+     */
     public function getAllUsersWithScores(User $currentUser): array
     {
         $query = $this->createQueryBuilder('i')
