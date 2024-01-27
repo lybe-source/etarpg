@@ -14,10 +14,8 @@ class ShopController extends AbstractController
     #[Route('/', name: "index")]
     public function index (): Response
     {
-        $perso = "Perso";
 
         return $this->render('shop/index.html.twig', [
-            'perso' => $perso,
             'cssClass' => $this->cssClass,
         ]);
     }
