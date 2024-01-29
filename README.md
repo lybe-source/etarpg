@@ -62,6 +62,8 @@ Each item must give a score, accumulated in the entity Inventory in order to cal
 
 The leaderboard will display all members of the discord who have run the command at least once. Whichever member has run the command, their rank will be displayed at the top of the board, followed by 1st if the member hasn't run the command, etc.  
 
+In the shop, the items will be randomised everyday.
+
 ---
 
 ## Dependencies
