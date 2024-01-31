@@ -76,6 +76,7 @@ In the shop, the items will be randomised everyday.
 ## TODO
 - DataFixtures
     - CategoryFixtures
+    - RarityFixtures
     - UserFixtures
     - ItemsFixtures
     - InventoryItemsFixtures
