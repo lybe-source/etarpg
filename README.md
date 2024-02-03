@@ -83,3 +83,5 @@ In the shop, the items will be randomised everyday.
     - InventoryItemsFixtures
 - Check inventory display
 - Leaderboard
+    - Check that all users are displayed and that the logged-in user is in the first cell of the table
+    
